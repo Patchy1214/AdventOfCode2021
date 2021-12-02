@@ -10,7 +10,3 @@ function depth_increase($depths) {
     }, ARRAY_FILTER_USE_BOTH);
     echo count($differences);
 }
-
-
-
-
