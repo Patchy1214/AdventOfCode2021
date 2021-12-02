@@ -3,19 +3,20 @@
 $file = file_get_contents("puzzles/day_2_puzzle.txt");
 $directions = explode("\n", $file);
 
-$position = get_positions($directions);
+echo "Position: " . get_positions($directions);
 
 function get_positions($directions) {
-    $position = [0, 0]; //[0] - Horizontal Position, [1] - Depth
+    $position = ['horizontal' => 0, 'depth' => 0, 'aim' => 0];
     foreach ($directions as $direction) {
         $data = explode(" ", $direction);
         if ($data[0] == "forward") {
-            $position[0] += (int) $data[1];
+            $position['horizontal'] += (int) $data[1];
+            $position['depth'] += $data[1] * $position['aim'];
         } else if ($data[0] == "down") {
-            $position[1] += (int) $data[1];
+            $position['aim'] += (int) $data[1];
         } else if ($data[0] == "up") {
-            $position[1] -= (int) $data[1];
+            $position['aim'] -= (int) $data[1];
         }
     }
-    return $position[0] * $position[1];
+    return $position['horizontal'] * $position['depth'];
 }
